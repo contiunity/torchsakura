@@ -104,3 +104,60 @@ class FunctionContainer(nn.Module):
   def __init__(self, func):
     super().__init__()
     self.forward = func
+
+# Hooker
+class SideInject(nn.Module):
+  def __init__(self, hookbox):
+    super().__init__()
+    self.hookbox = hookbox
+  def forward(self, *args, **kwargs):
+    return self.hookbox.get()
+
+class SideAdd(nn.Module):
+  def __init__(self, hookbox):
+    super().__init__()
+    self.hookbox = hookbox
+  def forward(self, x):
+    return x + self.hookbox.get()
+
+class SideSub(nn.Module):
+  def __init__(self, hookbox):
+    super().__init__()
+    self.hookbox = hookbox
+  def forward(self, x):
+    return x - self.hookbox.get()
+
+class SideMul(nn.Module):
+  def __init__(self, hookbox):
+    super().__init__()
+    self.hookbox = hookbox
+  def forward(self, x):
+    return x * self.hookbox.get()
+
+class SideDiv(nn.Module):
+  def __init__(self, hookbox):
+    super().__init__()
+    self.hookbox = hookbox
+  def forward(self, x):
+    return x / self.hookbox.get()
+
+class SideAdd(nn.Module):
+  def __init__(self, hookbox):
+    super().__init__()
+    self.hookbox = hookbox
+  def forward(self, x):
+    return x + self.hookbox.get()
+
+class SideGate(nn.Module):
+  def __init__(self, hookbox):
+    super().__init__()
+    self.hookbox = hookbox
+  def forward(self, x):
+    return x + torch.sigmoid(self.hookbox.get())
+
+class SideGateW(nn.Module):
+  def __init__(self, hookbox):
+    super().__init__()
+    self.hookbox = hookbox
+  def forward(self, x):
+    return torch.sigmoid(x) + self.hookbox.get()
