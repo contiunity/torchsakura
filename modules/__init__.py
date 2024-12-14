@@ -148,6 +148,14 @@ class SideAdd(nn.Module):
   def forward(self, x):
     return x + self.hookbox.get()
 
+class SideConcat(nn.Module):
+  def __init__(self, hookbox, dim=-1):
+    super().__init__()
+    self.hookbox = hookbox
+    self.dim = dim
+  def forward(self, x):
+    return torch.cat((x, self.hookbox.get()), dim=self.dim)
+
 class SideGate(nn.Module):
   def __init__(self, hookbox):
     super().__init__()
